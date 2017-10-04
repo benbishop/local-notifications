@@ -10,7 +10,7 @@ namespace RendrKit.LocalNotification.Samples
         {
             InitializeComponent();
 
-            this.NotificationTimePicker.Time = (DateTime.UtcNow - DateTime.UtcNow.Date);
+            this.NotificationTimePicker.Time = (DateTime.Now - DateTime.Now.Date);
             this.AddNotificationButton.Clicked += AddNotificationButton_Clicked;
         }
 
@@ -19,7 +19,7 @@ namespace RendrKit.LocalNotification.Samples
             var notification = new LocalNotifications.Models.LocalNotification()
             {
                 Text = "Testing Notification",
-                FireDate = DateTime.UtcNow.Date.AddHours(this.NotificationTimePicker.Time.Hours).AddMinutes(this.NotificationTimePicker.Time.Minutes)
+                FireDate = DateTime.Now.Date.AddHours(this.NotificationTimePicker.Time.Hours).AddMinutes(this.NotificationTimePicker.Time.Minutes)
             };
 
             App.NotificationService.AddNotification(notification);

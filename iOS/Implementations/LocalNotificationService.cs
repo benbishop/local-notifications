@@ -2,9 +2,9 @@
 using System.Diagnostics;
 using Foundation;
 using RendrKit.LocalNotifications.Interfaces;
+using RendrKit.LocalNotifications.iOS.Extensions;
 using RendrKit.LocalNotifications.Models;
 using UIKit;
-using Xamarin.Forms.Platform.iOS;
 
 namespace RendrKit.LocalNotifications.iOS.Implementations
 {
