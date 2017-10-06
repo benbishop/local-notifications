@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using RendrKit.LocalNotifications.iOS.Helpers;
 using RendrKit.LocalNotifications.iOS.Implementations;
 using UIKit;
 
@@ -31,7 +32,9 @@ namespace RendrKit.LocalNotification.Samples.iOS
 
         public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
         {
-			var alert = new UIAlertView("LocalNotification", notification.AlertBody, null, "Ok");
+            var localNotification = LocalNotificationHelper.CreateFromUILocalNotification(notification);
+
+			var alert = new UIAlertView("LocalNotification", localNotification.Text, null, "Ok");
 			alert.Show();
         }
     }

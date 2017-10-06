@@ -17,11 +17,15 @@ namespace RendrKit.LocalNotifications.iOS.Implementations
 			date = date.AddHours(notification.FireDate.Hour);
 			date = date.AddMinutes(notification.FireDate.Minute);
 
+			var keys = new object[] { "id", "fire_date", "text" };
+			var objects = new object[] { notification.Id ?? string.Empty, notification.FireDate.Ticks.ToString(), notification.Text ?? string.Empty };
+
 			UILocalNotification uiNotification = new UILocalNotification
 			{
 				FireDate = date.ToNSDate(),
 				TimeZone = NSTimeZone.LocalTimeZone,
 				AlertBody = notification.Text,
+                UserInfo = NSDictionary.FromObjectsAndKeys(objects, keys),
 				RepeatInterval = 0,				
 				SoundName = UILocalNotification.DefaultSoundName,
 				ApplicationIconBadgeNumber = 1

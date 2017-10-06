@@ -86,6 +86,7 @@
     <Compile Include="LocalNotificationsAndroid.cs" />
     <Compile Include="Implementations\LocalNotificationService.cs" />
     <Compile Include="LocalNotificationConfig.cs" />
+    <Compile Include="Helpers\LocalNotificationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -103,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Implementations\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

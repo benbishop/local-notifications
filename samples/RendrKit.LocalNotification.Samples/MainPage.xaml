@@ -12,9 +12,11 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TimePicker x:Name="NotificationTimePicker" Grid.Row="0" Grid.Column="0" />    
-        <Button x:Name="AddNotificationButton" Grid.Row="0" Grid.Column="1" Text="Add Notification" />
+        <Entry x:Name="NotificationText" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="Notification Text" />
+        <TimePicker x:Name="NotificationTimePicker" Grid.Row="1" Grid.Column="0" />    
+        <Button x:Name="AddNotificationButton" Grid.Row="1" Grid.Column="1" Text="Add Notification" />
     </Grid>	
 </ContentPage>

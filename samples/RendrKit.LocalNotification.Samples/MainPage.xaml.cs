@@ -18,7 +18,7 @@ namespace RendrKit.LocalNotification.Samples
         {
             var notification = new LocalNotifications.Models.LocalNotification()
             {
-                Text = "Testing Notification",
+                Text = NotificationText.Text,
                 FireDate = DateTime.Now.Date.AddHours(this.NotificationTimePicker.Time.Hours).AddMinutes(this.NotificationTimePicker.Time.Minutes)
             };
 

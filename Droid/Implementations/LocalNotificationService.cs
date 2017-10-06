@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Android.App;
 using Android.Content;
 using Java.Util;
+using RendrKit.LocalNotifications.Droid.Helpers;
 using RendrKit.LocalNotifications.Interfaces;
 using RendrKit.LocalNotifications.Models;
 using Xamarin.Forms;
@@ -61,9 +62,10 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
 		private Intent CreateAlarmIntent(LocalNotifications.Models.LocalNotification notification)
 		{
 			Intent intent = new Intent(Context, typeof(ReminderReceiver));
-
-			var contents = string.Empty;
-			intent.PutExtra("item_json", contents);
+            			
+			intent.PutExtra("id", notification.Id);
+            intent.PutExtra("fire_date", notification.FireDate.Ticks.ToString());
+            intent.PutExtra("text", notification.Text);
 			return intent;
 		}
 
@@ -83,7 +85,8 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
 		{
             if (IsForeGround())
             {
-                ShowMessage();
+                var notification = LocalNotificationHelper.CreateFromIntent(intent);
+                ShowMessage(notification);
             }
 			else
 			{
@@ -93,11 +96,11 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
 			}
 		}
 
-		private void ShowMessage()
+		private void ShowMessage(LocalNotification localNotification)
 		{
             if (LocalNotificationsAndroid.ShowMessage != null)
             {
-                LocalNotificationsAndroid.ShowMessage(Xamarin.Forms.Forms.Context, new LocalNotification());
+                LocalNotificationsAndroid.ShowMessage(Xamarin.Forms.Forms.Context, localNotification);
             }
             else
             {
@@ -105,7 +108,7 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
 
                 var alertDialog = new AlertDialog.Builder(Xamarin.Forms.Forms.Context)
                                      .SetTitle(config.Title)
-                                     .SetMessage("Testing")
+                                     .SetMessage(localNotification.Text)
                                      .SetCancelable(false)
                                      .SetPositiveButton("Ok", (sender, e) => { });
                 alertDialog.Show();
@@ -144,17 +147,17 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
 
 		protected override void OnHandleIntent(Intent intent)
 		{			
-            var message = string.Empty;
-			ShowNotification();
+            var notification = LocalNotificationHelper.CreateFromIntent(intent);
+			ShowNotification(notification);
 			
 			Android.Support.V4.Content.WakefulBroadcastReceiver.CompleteWakefulIntent(intent);		
 		}
 
-        private void ShowNotification()
+        private void ShowNotification(LocalNotification localNotification)
 		{
             if (LocalNotificationsAndroid.ShowNotification != null)
-            {
-                LocalNotificationsAndroid.ShowNotification(ApplicationContext, new LocalNotification());
+            {                
+                LocalNotificationsAndroid.ShowNotification(ApplicationContext, localNotification);
             }
             else
             {
@@ -164,7 +167,7 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
                     .SetContentTitle(config.Title)
                     .SetAutoCancel(true)
                     .SetSmallIcon(config.IconResource)
-                    .SetContentText("Testing");
+                    .SetContentText(localNotification.Text);
 
                 //Intent resultIntent = new Intent(this, typeof(SplashScreenActivity));
                 var resultIntent = new Intent();
