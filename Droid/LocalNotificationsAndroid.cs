@@ -18,5 +18,19 @@ namespace RendrKit.LocalNotifications.Droid
             get { return _iconResource; }
             set { _iconResource = value; }
         }
+
+        static Action<Context, LocalNotifications.Models.LocalNotification> _showMessage;
+        public static Action<Context, LocalNotifications.Models.LocalNotification> ShowMessage
+        {
+            get { return _showMessage; }
+            set { _showMessage = value; }
+        }
+
+        static Action<Context, LocalNotifications.Models.LocalNotification> _showNotification;
+        public static Action<Context, LocalNotifications.Models.LocalNotification> ShowNotification
+		{
+			get { return _showNotification; }
+			set { _showNotification = value; }
+		}
     }
 }

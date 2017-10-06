@@ -94,15 +94,22 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
 		}
 
 		private void ShowMessage()
-		{            
-            var config = new LocalNotificationConfig(Xamarin.Forms.Forms.Context);
+		{
+            if (LocalNotificationsAndroid.ShowMessage != null)
+            {
+                LocalNotificationsAndroid.ShowMessage(Xamarin.Forms.Forms.Context, new LocalNotification());
+            }
+            else
+            {
+                var config = new LocalNotificationConfig(Xamarin.Forms.Forms.Context);
 
-            var alertDialog = new AlertDialog.Builder(Xamarin.Forms.Forms.Context)
-                                 .SetTitle(config.Title)
-                                 .SetMessage("Testing")
-                                 .SetCancelable(false)
-                                 .SetPositiveButton("Ok", (sender, e) => { });
-            alertDialog.Show();
+                var alertDialog = new AlertDialog.Builder(Xamarin.Forms.Forms.Context)
+                                     .SetTitle(config.Title)
+                                     .SetMessage("Testing")
+                                     .SetCancelable(false)
+                                     .SetPositiveButton("Ok", (sender, e) => { });
+                alertDialog.Show();
+            }
 		}
 
         private bool IsForeGround()
@@ -138,33 +145,40 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
 		protected override void OnHandleIntent(Intent intent)
 		{			
             var message = string.Empty;
-			SendNotification();
+			ShowNotification();
 			
 			Android.Support.V4.Content.WakefulBroadcastReceiver.CompleteWakefulIntent(intent);		
 		}
 
-		private void SendNotification()
+        private void ShowNotification()
 		{
-            var config = new LocalNotificationConfig(ApplicationContext);
+            if (LocalNotificationsAndroid.ShowNotification != null)
+            {
+                LocalNotificationsAndroid.ShowNotification(ApplicationContext, new LocalNotification());
+            }
+            else
+            {
+                var config = new LocalNotificationConfig(ApplicationContext);
 
-			Notification.Builder builder = new Notification.Builder(ApplicationContext)
-				.SetContentTitle(config.Title)
-				.SetAutoCancel(true)
-                .SetSmallIcon(config.IconResource)
-				.SetContentText("Testing");
+                Notification.Builder builder = new Notification.Builder(ApplicationContext)
+                    .SetContentTitle(config.Title)
+                    .SetAutoCancel(true)
+                    .SetSmallIcon(config.IconResource)
+                    .SetContentText("Testing");
 
-            //Intent resultIntent = new Intent(this, typeof(SplashScreenActivity));
-            var resultIntent = new Intent();
-			resultIntent.SetFlags(ActivityFlags.PreviousIsTop);
+                //Intent resultIntent = new Intent(this, typeof(SplashScreenActivity));
+                var resultIntent = new Intent();
+                resultIntent.SetFlags(ActivityFlags.PreviousIsTop);
 
-			PendingIntent resultPendingIntent = PendingIntent.GetActivity(this.ApplicationContext, 0, resultIntent, PendingIntentFlags.UpdateCurrent);
+                PendingIntent resultPendingIntent = PendingIntent.GetActivity(this.ApplicationContext, 0, resultIntent, PendingIntentFlags.UpdateCurrent);
 
-			builder.SetContentIntent(resultPendingIntent);
+                builder.SetContentIntent(resultPendingIntent);
 
-			var random = new System.Random(DateTime.Now.Millisecond);
-			var id = random.Next();
+                var random = new System.Random(DateTime.Now.Millisecond);
+                var id = random.Next();
 
-            NotificationManager.Notify(id, builder.Build());
+                NotificationManager.Notify(id, builder.Build());
+            }
 		}
 	}
 }
