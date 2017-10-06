@@ -8,6 +8,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using RendrKit.LocalNotifications.Droid.Implementations;
+using RendrKit.LocalNotifications.Droid;
 
 namespace RendrKit.LocalNotification.Samples.Droid
 {
@@ -23,6 +24,10 @@ namespace RendrKit.LocalNotification.Samples.Droid
             LoadApplication(new App());
 
             App.NotificationService = new LocalNotificationService();
+
+            // By Default We use for Title the Android:Name attribute and for icon a drawable with the name "icon", you can set them using the properties below
+            LocalNotificationsAndroid.IconResource = Resource.Drawable.ic_media_play;
+            LocalNotificationsAndroid.Title = "Testing";
         }
     }
 }

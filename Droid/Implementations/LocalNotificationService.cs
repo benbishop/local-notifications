@@ -95,8 +95,10 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
 
 		private void ShowMessage()
 		{            
+            var config = new LocalNotificationConfig(Xamarin.Forms.Forms.Context);
+
             var alertDialog = new AlertDialog.Builder(Xamarin.Forms.Forms.Context)
-                                 .SetTitle("RendrKit.LocalNotifications")
+                                 .SetTitle(config.Title)
                                  .SetMessage("Testing")
                                  .SetCancelable(false)
                                  .SetPositiveButton("Ok", (sender, e) => { });
@@ -134,28 +136,21 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
 		}
 
 		protected override void OnHandleIntent(Intent intent)
-		{
-			try
-			{
-                var message = string.Empty;
-				SendNotification();
-			}
-			catch (Exception ex)
-			{
-
-			}
-			finally
-			{
-				Android.Support.V4.Content.WakefulBroadcastReceiver.CompleteWakefulIntent(intent);
-			}
+		{			
+            var message = string.Empty;
+			SendNotification();
+			
+			Android.Support.V4.Content.WakefulBroadcastReceiver.CompleteWakefulIntent(intent);		
 		}
 
 		private void SendNotification()
 		{
+            var config = new LocalNotificationConfig(ApplicationContext);
+
 			Notification.Builder builder = new Notification.Builder(ApplicationContext)
-				.SetContentTitle("RendrKit.LocalNotifications")
+				.SetContentTitle(config.Title)
 				.SetAutoCancel(true)
-                .SetSmallIcon(Resource.Drawable.ic_media_play)
+                .SetSmallIcon(config.IconResource)
 				.SetContentText("Testing");
 
             //Intent resultIntent = new Intent(this, typeof(SplashScreenActivity));
