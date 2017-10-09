@@ -40,8 +40,13 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
 
 		public LocalNotifications.Models.LocalNotification AddNotification(LocalNotifications.Models.LocalNotification notification)
 		{
+			var random = new System.Random(DateTime.Now.Millisecond);
+			var id = random.Next();
+
+            notification.Id = id;
+
 			var intent = CreateAlarmIntent(notification);
-			var pendingIntent = CreatePendingIntent(intent, PendingIntentFlags.CancelCurrent);
+			var pendingIntent = CreatePendingIntent(intent, PendingIntentFlags.CancelCurrent, notification);
 
 			var calendar = Calendar.Instance;
 			calendar.TimeInMillis = Java.Lang.JavaSystem.CurrentTimeMillis();
@@ -54,7 +59,7 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
 
 			AlarmManager.Set(AlarmType.RtcWakeup, calendar.TimeInMillis, pendingIntent);
 
-			Debug.WriteLine($"RendrKit.LocalNotifications: ADDED LOCAL NOTIFICATION: FireDate: {notification.FireDate} Message: {notification.Text}");
+            Debug.WriteLine($"RendrKit.LocalNotifications: ADDED LOCAL NOTIFICATION: Id: {notification.Id} FireDate: {notification.FireDate} Message: {notification.Text}");
 
 			return notification;
 		}
@@ -69,14 +74,20 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
 			return intent;
 		}
 
-		private PendingIntent CreatePendingIntent(Intent intent, PendingIntentFlags flag)
+		private PendingIntent CreatePendingIntent(Intent intent, PendingIntentFlags flag, LocalNotification notification)
 		{
-			var random = new System.Random(DateTime.Now.Millisecond);
-			var id = random.Next();
-
-			return PendingIntent.GetBroadcast(Context, id, intent, flag);
+			return PendingIntent.GetBroadcast(Context, notification.Id, intent, flag);
 		}
-	}
+
+        public void RemoveNotification(int notificationId)
+        {
+			var intent = new Intent(Context, typeof(ReminderReceiver));
+            var pendingIntent = PendingIntent.GetBroadcast(Context, notificationId, intent, PendingIntentFlags.CancelCurrent);
+			pendingIntent.Cancel();
+
+            Debug.WriteLine($"RendrKit.LocalNotifications: REMOVED LOCAL NOTIFICATION: Id: {notificationId}");
+        }
+    }
 
 	[BroadcastReceiver(Exported = true)]
 	public class ReminderReceiver : Android.Support.V4.Content.WakefulBroadcastReceiver

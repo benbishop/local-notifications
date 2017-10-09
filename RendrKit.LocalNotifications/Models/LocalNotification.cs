@@ -4,7 +4,7 @@ namespace RendrKit.LocalNotifications.Models
 {
     public class LocalNotification
     {
-        public string Id
+        public int Id
         {
             get;
             set;

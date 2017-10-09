@@ -18,5 +18,23 @@
         <Entry x:Name="NotificationText" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="Notification Text" />
         <TimePicker x:Name="NotificationTimePicker" Grid.Row="1" Grid.Column="0" />    
         <Button x:Name="AddNotificationButton" Grid.Row="1" Grid.Column="1" Text="Add Notification" />
+        <ListView
+            Margin="10"
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            x:Name="NotificationsList">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Text}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                            <Label Text="{Binding FireDate}" VerticalOptions="Center" HorizontalOptions="End" />
+                            <Button Text="Delete" Clicked="Handle_Clicked" />
+                        </StackLayout>    
+                    </ViewCell>    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>	
 </ContentPage>

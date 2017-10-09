@@ -18,7 +18,7 @@ namespace RendrKit.LocalNotifications.iOS.Implementations
 			date = date.AddMinutes(notification.FireDate.Minute);
 
 			var keys = new object[] { "id", "fire_date", "text" };
-			var objects = new object[] { notification.Id ?? string.Empty, notification.FireDate.Ticks.ToString(), notification.Text ?? string.Empty };
+			var objects = new object[] { notification.Id, notification.FireDate.Ticks.ToString(), notification.Text ?? string.Empty };
 
 			UILocalNotification uiNotification = new UILocalNotification
 			{
@@ -31,10 +31,24 @@ namespace RendrKit.LocalNotifications.iOS.Implementations
 				ApplicationIconBadgeNumber = 1
 			};
             			
-            Debug.WriteLine($"RendrKit.LocalNotifications: ADDED LOCAL NOTIFICATION: FireDate: {notification.FireDate} Message: {notification.Text}");
+            Debug.WriteLine($"RendrKit.LocalNotifications: ADDED LOCAL NOTIFICATION: Id: {notification.Id} FireDate: {notification.FireDate} Message: {notification.Text}");
 			UIApplication.SharedApplication.ScheduleLocalNotification(uiNotification);
 
             return notification;
+        }
+
+        public void RemoveNotification(int notificationId)
+        {
+			foreach (UILocalNotification notification in UIApplication.SharedApplication.ScheduledLocalNotifications)
+			{
+                var id = int.Parse(notification.UserInfo.ValueForKey(new Foundation.NSString("id")).ToString());
+                if (id == notificationId)
+                {
+                    UIApplication.SharedApplication.CancelLocalNotification(notification);
+                    Debug.WriteLine($"RendrKit.LocalNotifications: REMOVED LOCAL NOTIFICATION: Id: {notificationId}");
+                    break;
+                }
+			}
         }
     }
 }

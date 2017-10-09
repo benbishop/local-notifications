@@ -9,7 +9,7 @@ namespace RendrKit.LocalNotifications.Droid.Helpers
         {
             var notification = new Models.LocalNotification();
 
-            notification.Id = intent.GetStringExtra("id");
+            notification.Id = intent.GetIntExtra("id", 0);
             notification.FireDate = new DateTime(long.Parse(intent.GetStringExtra("fire_date")));
             notification.Text = intent.GetStringExtra("text");
 

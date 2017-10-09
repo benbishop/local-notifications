@@ -9,7 +9,7 @@ namespace RendrKit.LocalNotifications.iOS.Helpers
 		{
 			var notification = new Models.LocalNotification();
 
-			notification.Id = uiNotification.UserInfo.ValueForKey(new Foundation.NSString("id")).ToString();
+            notification.Id = int.Parse(uiNotification.UserInfo.ValueForKey(new Foundation.NSString("id")).ToString());
             notification.FireDate = new DateTime(long.Parse(uiNotification.UserInfo.ValueForKey(new Foundation.NSString("fire_date")).ToString()));
 			notification.Text = uiNotification.UserInfo.ValueForKey(new Foundation.NSString("text")).ToString();
 
