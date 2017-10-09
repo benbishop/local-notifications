@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RendrKit.LocalNotifications", "RendrKit.LocalNotifications\RendrKit.LocalNotifications.csproj", "{7C6BCCDA-883E-408D-9CD3-E42622B9357E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RendrKit.LocalNotifications.iOS", "iOS\RendrKit.LocalNotifications.iOS.csproj", "{283688C4-8540-4760-BB3A-FCD0DC1B23B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RendrKit.LocalNotifications.iOS", "RendrKit.LocalNotifications.iOS\RendrKit.LocalNotifications.iOS.csproj", "{283688C4-8540-4760-BB3A-FCD0DC1B23B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RendrKit.LocalNotifications.Droid", "Droid\RendrKit.LocalNotifications.Droid.csproj", "{F8E58C7A-8D38-49FC-9DFB-22259133CA64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RendrKit.LocalNotifications.Droid", "RendrKit.LocalNotifications.Droid\RendrKit.LocalNotifications.Droid.csproj", "{F8E58C7A-8D38-49FC-9DFB-22259133CA64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
