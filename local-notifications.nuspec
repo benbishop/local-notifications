@@ -25,7 +25,7 @@
 
 		<!--Xamarin.Android-->
 		<file src="RendrKit.LocalNotifications/bin/Release/RendrKit.LocalNotifications.dll" target="lib\MonoAndroid10/RendrKit.LocalNotifications.dll" />			
-		<file src="RendrKit.LocalNotifications.Android/bin/Release/RendrKit.LocalNotifications.Android.dll" target="lib\MonoAndroid10/RendrKit.LocalNotifications.Android.dll"/>	
+		<file src="RendrKit.LocalNotifications.Droid/bin/Release/RendrKit.LocalNotifications.Droid.dll" target="lib\MonoAndroid10/RendrKit.LocalNotifications.Droid.dll"/>	
 
 		<!--Xamarin.iOSUnified-->
 		<file src="RendrKit.LocalNotifications/bin/Release/RendrKit.LocalNotifications.dll" target="lib\Xamarin.iOS10/RendrKit.LocalNotifications.dll" />			
