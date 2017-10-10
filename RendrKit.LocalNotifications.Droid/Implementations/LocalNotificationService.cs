@@ -180,8 +180,8 @@ namespace RendrKit.LocalNotifications.Droid.Implementations
                     .SetSmallIcon(config.IconResource)
                     .SetContentText(localNotification.Text);
 
-                //Intent resultIntent = new Intent(this, typeof(SplashScreenActivity));
-                var resultIntent = new Intent();
+                var resultIntent = PackageManager.GetLaunchIntentForPackage(ApplicationContext.PackageName);
+
                 resultIntent.SetFlags(ActivityFlags.PreviousIsTop);
 
                 PendingIntent resultPendingIntent = PendingIntent.GetActivity(this.ApplicationContext, 0, resultIntent, PendingIntentFlags.UpdateCurrent);

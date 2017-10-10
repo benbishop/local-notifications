@@ -121,7 +121,7 @@
       <Project>{7C6BCCDA-883E-408D-9CD3-E42622B9357E}</Project>
       <Name>RendrKit.LocalNotifications</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\iOS\RendrKit.LocalNotifications.iOS.csproj">
+    <ProjectReference Include="..\..\RendrKit.LocalNotifications.iOS\RendrKit.LocalNotifications.iOS.csproj">
       <Project>{283688C4-8540-4760-BB3A-FCD0DC1B23B5}</Project>
       <Name>RendrKit.LocalNotifications.iOS</Name>
     </ProjectReference>

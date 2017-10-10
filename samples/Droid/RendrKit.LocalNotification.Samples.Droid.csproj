@@ -113,7 +113,7 @@
       <Project>{7C6BCCDA-883E-408D-9CD3-E42622B9357E}</Project>
       <Name>RendrKit.LocalNotifications</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Droid\RendrKit.LocalNotifications.Droid.csproj">
+    <ProjectReference Include="..\..\RendrKit.LocalNotifications.Droid\RendrKit.LocalNotifications.Droid.csproj">
       <Project>{F8E58C7A-8D38-49FC-9DFB-22259133CA64}</Project>
       <Name>RendrKit.LocalNotifications.Droid</Name>
     </ProjectReference>

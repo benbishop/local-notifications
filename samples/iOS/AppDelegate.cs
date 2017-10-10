@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Foundation;
 using RendrKit.LocalNotifications.iOS.Helpers;
 using RendrKit.LocalNotifications.iOS.Implementations;
